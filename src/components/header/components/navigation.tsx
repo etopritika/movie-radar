@@ -29,7 +29,7 @@ export default function Navigation() {
             className={`rounded-full py-2.5 px-[26px] text-xs leading-[14px] font-medium uppercase 
             sm:flex sm:items-center 
             xl:px-8 xl:py-3.5 transition duration-300 ${isActive("/library")}`}
-            href="/library"
+            href="/library/1"
           >
             library
           </Link>
