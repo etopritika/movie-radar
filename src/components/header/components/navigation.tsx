@@ -8,7 +8,7 @@ export default function Navigation() {
   const pathname = usePathname();
 
   const isActive = (route: string) =>
-    pathname === route
+    pathname.includes(route)
       ? "bg-black text-white"
       : "bg-white hover:bg-black hover:text-white focus:bg-black focus:text-white focus:outline-none active:bg-black active:text-white";
 
@@ -21,7 +21,7 @@ export default function Navigation() {
             className={`rounded-full py-2.5 px-[26px] text-xs leading-[14px] font-medium uppercase 
             sm:flex sm:items-center 
             xl:px-8 xl:py-3.5 transition duration-300 ${isActive("/trending")}`}
-            href="/trending"
+            href="/trending/1"
           >
             home
           </Link>
