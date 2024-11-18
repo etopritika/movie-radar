@@ -1,5 +1,5 @@
+import { fetchMovies } from "@/lib/api";
 import { Movie } from "@/lib/types";
-import { fetchMovies } from "./actions";
 
 export default async function SearchPage({
   params,
@@ -10,7 +10,7 @@ export default async function SearchPage({
   const searchQuery = query[0] || "";
   const page = Number(query[1]) || 1;
   const movies = await fetchMovies(searchQuery, page);
-  // console.log(movies);
+
   return (
     <div>
       <ul>
