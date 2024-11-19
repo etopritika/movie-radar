@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 export default function Navigation() {
   const pathname = usePathname();
+  const isAnimating = false;
 
   const isActive = (route: string) =>
     pathname.includes(route)
@@ -36,7 +37,7 @@ export default function Navigation() {
         </div>
       </div>
       <Link href="/" className="flex items-center space-x-2">
-        <Logo />
+        <Logo isAnimating={isAnimating} />
         <span
           className="text-white text-2xl font-medium 
         sm:text-4xl 
