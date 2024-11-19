@@ -1,69 +1,45 @@
-export const Logo = () => {
+interface LogoProps {
+  isAnimating: boolean; // Додаємо проп для контролю анімації
+}
+
+export const Logo = ({ isAnimating }: LogoProps) => {
   return (
     <svg
-      className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 xl:w-[60px] xl:h-[60px]"
-      viewBox="0 0 59 59"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      width="100"
+      height="100"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="white"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 xl:w-[60px] xl:h-[60px]"
     >
+      <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34" />
+      <path d="M4 6h.01" />
+      <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35" />
+      <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67" />
+      <path d="M12 18h.01" />
+      <path d="M17.99 11.66A6 6 0 0 1 15.77 16.67" />
+      <circle cx="12" cy="12" r="2" />
       <path
-        d="M48.7242 4.9165H10.2759C7.31613 4.9165 4.91675 7.31588 4.91675
-           10.2757V48.724C4.91675 51.6838 7.31613 54.0831 10.2759 54.0831H48.7242C51.684
-            54.0831 54.0834 51.6838 54.0834 48.724V10.2757C54.0834 7.31588 51.684 4.9165 48.7242 4.9165Z"
+        d="m13.41 10.59 5.66-5.66"
         stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17.2083 4.9165V54.0831"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M41.7917 4.9165V54.0831"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.91675 29.5H54.0834"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.91675 17.2085H17.2084"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.91675 41.7915H17.2084"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M41.7917 41.7915H54.0834"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M41.7917 17.2085H54.0834"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+        stroke-width="2"
+        fill="none"
+      >
+        {isAnimating && (
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 12 12"
+            to="360 12 12"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+        )}
+      </path>
     </svg>
   );
 };

@@ -1,3 +1,4 @@
+import MovieGallery from "@/components/movie-gallery";
 import { fetchTrending } from "@/lib/api";
 import { Movie } from "@/lib/types";
 
@@ -19,16 +20,11 @@ export default async function Trending({
 
   const page = Number(pageNumber) || 1;
 
-  const movies = await fetchTrending(page);
-
+  const movies = (await fetchTrending(page)) as Movie[];
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Trending Movies (Page {page})</h1>
-      <ul>
-        {movies.map((movie: Movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-    </div>
+    <section>
+      <h1 className="sr-only">Trending Movies</h1>
+      <MovieGallery movies={movies} />
+    </section>
   );
 }
