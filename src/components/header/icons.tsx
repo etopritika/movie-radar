@@ -11,9 +11,9 @@ export const Logo = ({ isAnimating }: LogoProps) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="white"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 xl:w-[60px] xl:h-[60px]"
     >
       <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34" />
@@ -26,7 +26,7 @@ export const Logo = ({ isAnimating }: LogoProps) => {
       <path
         d="m13.41 10.59 5.66-5.66"
         stroke="white"
-        stroke-width="2"
+        strokeWidth="2"
         fill="none"
       >
         {isAnimating && (
