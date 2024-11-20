@@ -25,28 +25,28 @@ export default function MoviePagination({
   const isFirstPage = currentPage <= 1;
   const isLastPage = currentPage >= totalPages;
 
-  const getPageHref = (page: number) => {
-    if (pathname.startsWith("/search")) {
-      return `/search/${query}/${page}`;
-    }
-    return `/trending/${page}`;
-  };
+  const getPageHref = (page: number) =>
+    pathname.startsWith("/search")
+      ? `/search/${query}/${page}`
+      : `/trending/${page}`;
+
+  const activeClass = "pointer-events-none bg-red-500 border-none rounded-md";
+  const inactiveClass = "hover:bg-red-400";
 
   const createPageLink = (
     page: number,
     isActive: boolean,
-    className = "",
-    hidden = ""
+    additionalClass = "",
+    hiddenSuffix = ""
   ) => (
-    <PaginationItem key={`page-${page}${hidden}`} className={className}>
+    <PaginationItem
+      key={`page-${page}${hiddenSuffix}`}
+      className={additionalClass}
+    >
       <PaginationLink
         href={getPageHref(page)}
         isActive={isActive}
-        className={`${
-          isActive
-            ? "pointer-events-none bg-red-500 border-none rounded-md"
-            : "hover:bg-red-400"
-        }`}
+        className={isActive ? activeClass : inactiveClass}
       >
         {page}
       </PaginationLink>
@@ -62,7 +62,7 @@ export default function MoviePagination({
       }
     } else {
       pages.push(
-        createPageLink(1, 1 === currentPage, "hidden sm:flex", "-hidden")
+        createPageLink(1, currentPage === 1, "hidden sm:flex", "-hidden")
       );
 
       if (currentPage > 4) {
@@ -83,7 +83,7 @@ export default function MoviePagination({
       }
 
       if (currentPage <= 4) {
-        pages.unshift(createPageLink(1, 1 === currentPage, "sm:hidden"));
+        pages.unshift(createPageLink(1, currentPage === 1, "sm:hidden"));
       }
 
       if (currentPage < totalPages - 3) {
@@ -98,7 +98,7 @@ export default function MoviePagination({
       pages.push(
         createPageLink(
           totalPages,
-          totalPages === currentPage,
+          currentPage === totalPages,
           "hidden sm:flex",
           "-hidden"
         )
@@ -106,7 +106,7 @@ export default function MoviePagination({
 
       if (currentPage >= totalPages - 3) {
         pages.push(
-          createPageLink(totalPages, totalPages === currentPage, "sm:hidden")
+          createPageLink(totalPages, currentPage === totalPages, "sm:hidden")
         );
       }
     }
