@@ -1,8 +1,7 @@
-interface LogoProps {
-  isAnimating: boolean; // Додаємо проп для контролю анімації
-}
+import { useLoadingStore } from "@/store/loading";
 
-export const Logo = ({ isAnimating }: LogoProps) => {
+export const Logo = () => {
+  const isPending = useLoadingStore((state) => state.isPending);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +28,7 @@ export const Logo = ({ isAnimating }: LogoProps) => {
         strokeWidth="2"
         fill="none"
       >
-        {isAnimating && (
+        {isPending && (
           <animateTransform
             attributeName="transform"
             type="rotate"
