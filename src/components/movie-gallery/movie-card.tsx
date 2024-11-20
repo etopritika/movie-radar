@@ -36,7 +36,7 @@ export default function MovieCard({
     <li className="relative transition-transform duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_18px_rgba(255,0,0,0.6)] rounded-[10px] sm:rounded-[15px] overflow-hidden">
       <button className="w-full h-full">
         <Image
-          className="h-full w-full max-h-[402px] sm:max-h-[455px] md:max-h-[435px] xl:max-h-[574px]"
+          className="h-full w-full max-h-[402px] sm:max-h-[455px] md:max-h-[455px] xl:max-h-[574px]"
           src={posterSrc}
           alt={overview || "No overview available"}
           width={395}

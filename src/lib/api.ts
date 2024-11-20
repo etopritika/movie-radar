@@ -11,7 +11,7 @@ export async function fetchTrending(page: number = 1) {
   }
 
   const data = await response.json();
-  return data.results || [];
+  return data;
 }
 
 export async function fetchMovies(searchQuery: string, page: number = 1) {
@@ -29,5 +29,5 @@ export async function fetchMovies(searchQuery: string, page: number = 1) {
   }
 
   const data = await response.json();
-  return data.results || [];
+  return data;
 }
