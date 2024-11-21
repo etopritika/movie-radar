@@ -30,7 +30,8 @@ export default function MoviePagination({
       ? `/search/${query}/${page}`
       : `/trending/${page}`;
 
-  const activeClass = "pointer-events-none bg-red-500 border-none rounded-md";
+  const activeClass =
+    "pointer-events-none bg-white text-black border-none rounded-md";
   const inactiveClass = "hover:bg-red-400";
 
   const createPageLink = (
