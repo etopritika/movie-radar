@@ -13,7 +13,7 @@ export default async function SearchPage({
   const response = await fetchMovies(searchQuery, page);
 
   return (
-    <section className="pb-10 sm:pb-12 md:pb-[60px]">
+    <section>
       <h1 className="sr-only">Results for - {searchQuery}</h1>
       <MovieGallery movies={response.results} />
       <MoviePagination
