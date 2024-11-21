@@ -1,6 +1,10 @@
 import { Genres } from "@/lib/types";
 import Image from "next/image";
 
+const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
+const PLACEHOLDER_IMAGE =
+  "https://placehold.co/395x574/000000/FFF?text=No+image";
+
 interface MovieCardProps {
   id: number;
   title: string;
@@ -20,17 +24,13 @@ export default function MovieCard({
   poster_path,
   overview,
   release_date,
-  genre_ids,
+  genre_ids = [],
 }: MovieCardProps) {
-  const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
-  const PLACEHOLDER_IMAGE =
-    "https://placehold.co/395x574/000000/FFF?text=No+image";
-
   const posterSrc = poster_path
     ? `${BASE_IMAGE_URL}/w500${poster_path}`
     : PLACEHOLDER_IMAGE;
 
-  const releaseDate = release_date.split("-")[0] || "date missing";
+  const releaseDate = release_date?.split("-")[0] || "date missing";
 
   return (
     <li className="relative transition-transform duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_18px_rgba(255,0,0,0.6)] rounded-[10px] sm:rounded-[15px] overflow-hidden">
