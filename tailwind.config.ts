@@ -19,6 +19,7 @@ export default {
     },
     extend: {
       colors: {
+        mutedGray: "#8C8C8C",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
