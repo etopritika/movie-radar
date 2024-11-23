@@ -6,42 +6,42 @@ interface ModalProviderProps {
   children: React.ReactNode;
 }
 
-export type ModalData = Record<string, unknown>;
+export type ModalData<T> = T;
 
-type ModalContextType = {
-  data: ModalData;
+type ModalContextType<T> = {
+  data: ModalData<T>;
   error: string | null;
-  loading: boolean; // Додано стан для завантаження
+  loading: boolean;
   isOpen: boolean;
-  setOpen: (modal: React.ReactNode, fetchData?: () => Promise<unknown>) => void;
+  setOpen: (modal: React.ReactNode, fetchData?: () => Promise<T>) => void;
   setClose: () => void;
 };
 
-export const ModalContext = createContext<ModalContextType | undefined>(
+export const ModalContext = createContext<ModalContextType<any> | undefined>(
   undefined
 );
 
-const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
+const ModalProvider = <T,>({ children }: ModalProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState<ModalData>({});
+  const [data, setData] = useState<ModalData<T> | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false); // Стан завантаження
+  const [loading, setLoading] = useState<boolean>(false);
   const [showingModal, setShowingModal] = useState<React.ReactNode>(null);
 
   const setOpen = async (
     modal: React.ReactNode,
-    fetchData?: () => Promise<unknown>
+    fetchData?: () => Promise<T>
   ) => {
     setError(null);
-    setData({});
-    setLoading(true); // Починаємо завантаження
+    setData(null);
+    setLoading(true);
     setShowingModal(modal);
-    setIsOpen(true); // Відкриваємо модальне вікно одразу
+    setIsOpen(true);
 
     if (fetchData) {
       try {
         const fetchedData = await fetchData();
-        setData(fetchedData as ModalData); // Зберігаємо отримані дані
+        setData(fetchedData);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
@@ -50,16 +50,16 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         }
         console.error("Error in setOpen:", err);
       } finally {
-        setLoading(false); // Завершуємо завантаження
+        setLoading(false);
       }
     } else {
-      setLoading(false); // Якщо немає fetchData
+      setLoading(false);
     }
   };
 
   const setClose = () => {
     setIsOpen(false);
-    setData({});
+    setData(null);
     setError(null);
     setLoading(false);
     setShowingModal(null);
@@ -75,8 +75,8 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   );
 };
 
-export const useModal = () => {
-  const context = useContext(ModalContext);
+export const useModal = <T,>() => {
+  const context = useContext(ModalContext) as ModalContextType<T> | undefined;
   if (!context) {
     throw new Error("useModal must be used within ModalProvider");
   }

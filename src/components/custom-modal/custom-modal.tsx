@@ -9,10 +9,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { X } from "lucide-react";
 
 type Props = {
-  title: string;
-  subheading: string;
+  title?: string;
+  subheading?: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
   className?: string;
@@ -31,10 +32,8 @@ const CustomModal = ({
 
   return (
     <Dialog open={isOpen || defaultOpen} onOpenChange={setClose}>
-      <DialogContent
-        className={clsx("md:max-h-screen md:h-fit bg-card ", className)}
-      >
-        <DialogHeader className="text-left">
+      <DialogContent className={clsx("md:h-fit bg-card relative ", className)}>
+        <DialogHeader className="text-left sr-only">
           <DialogTitle
             className={clsx("text-2xl font-bold", {
               "text-left": !centeredHeading,
@@ -45,6 +44,9 @@ const CustomModal = ({
           </DialogTitle>
           <DialogDescription>{subheading}</DialogDescription>
         </DialogHeader>
+        <button onClick={setClose} className="absolute top-2 right-2">
+          <X size={30} />
+        </button>
         {children}
       </DialogContent>
     </Dialog>
