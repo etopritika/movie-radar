@@ -1,15 +1,11 @@
 "use client";
 
-import { Genres } from "@/lib/types";
 import Image from "next/image";
 import { useModal } from "@/providers/modal-provider";
 import CustomModal from "../custom-modal/custom-modal";
 import MovieDetails from "../movie-details";
 import { fetchMovieByID } from "@/lib/api";
-
-const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
-const PLACEHOLDER_IMAGE =
-  "https://placehold.co/395x574/000000/FFF?text=No+image";
+import { getFormattedDate, getGenreList, getPosterSrc } from "@/lib/helpers";
 
 interface MovieCardProps {
   id: number;
@@ -18,18 +14,6 @@ interface MovieCardProps {
   overview: string;
   release_date: string;
   genre_ids: number[];
-}
-
-function getPosterSrc(posterPath: string | null): string {
-  return posterPath ? `${BASE_IMAGE_URL}/w500${posterPath}` : PLACEHOLDER_IMAGE;
-}
-
-function getFormattedDate(date: string | null): string {
-  return date?.split("-")[0] || "date missing";
-}
-
-function getGenreList(genreIds: number[]): string[] {
-  return genreIds.map((id) => Genres[id] || "Unknown");
 }
 
 export default function MovieCard({
@@ -49,9 +33,9 @@ export default function MovieCard({
   const handleOpenModal = () => {
     setOpen(
       <CustomModal
-        title="Projekt löschen"
-        subheading="Das Projekt wird gelöscht und Sie müssen die Entwickler kontaktieren, um es wiederherzustellen."
-        className="bg-white"
+        title=""
+        subheading=""
+        className="bg-white px-7 pt-12 pb-10 max-w-[280px] sm:max-w-[576px] md:max-w-[704px] xl:max-w-[806px] md:pt-10 md:px-9 md:pb-16 md:pr-[72px] xl:py-10 xl:px-3"
       >
         <MovieDetails />
       </CustomModal>,
