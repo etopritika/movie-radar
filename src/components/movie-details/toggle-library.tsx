@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Plus, Check } from "lucide-react";
-import { getPosterSrc } from "@/lib/helpers";
 
 interface MovieData {
   id: number;
@@ -14,59 +13,45 @@ interface ToggleLibraryProps {
   onToggle?: (checked: boolean) => void;
 }
 
-const LOCAL_STORAGE_KEYS = {
-  SET: "librarySet",
-  MOVIES: "library",
+const getSavedMovies = (): MovieData[] => {
+  return JSON.parse(localStorage.getItem("movies") || "[]");
+};
+
+const saveMovies = (movies: MovieData[]) => {
+  localStorage.setItem("movies", JSON.stringify(movies));
+};
+
+const isMovieSaved = (id: number): boolean => {
+  const savedMovies = getSavedMovies();
+  return savedMovies.some((movie) => movie.id === id);
+};
+
+const addMovie = (movie: MovieData) => {
+  const savedMovies = getSavedMovies();
+  saveMovies([...savedMovies, movie]);
+};
+
+const removeMovie = (id: number) => {
+  const savedMovies = getSavedMovies();
+  saveMovies(savedMovies.filter((movie) => movie.id !== id));
 };
 
 const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    const savedSet = loadLibrarySet();
-    setChecked(savedSet.has(data.id));
+    setChecked(isMovieSaved(data.id));
   }, [data.id]);
 
-  const loadLibrarySet = (): Set<number> => {
-    return new Set<number>(
-      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.SET) || "[]")
-    );
-  };
-
-  const loadMovies = (): MovieData[] => {
-    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.MOVIES) || "[]");
-  };
-
-  const saveLibrarySet = (set: Set<number>) => {
-    localStorage.setItem(LOCAL_STORAGE_KEYS.SET, JSON.stringify([...set]));
-  };
-
-  const saveMovies = (movies: MovieData[]) => {
-    localStorage.setItem(LOCAL_STORAGE_KEYS.MOVIES, JSON.stringify(movies));
-  };
-
   const handleChange = () => {
-    const savedSet = loadLibrarySet();
-    const savedMovies = loadMovies();
-    const newChecked = !checked;
-
-    setChecked(newChecked);
-
-    if (newChecked) {
-      savedSet.add(data.id);
-      savedMovies.push({
-        ...data,
-        poster_path: getPosterSrc(data.poster_path),
-      });
+    if (checked) {
+      removeMovie(data.id);
     } else {
-      savedSet.delete(data.id);
-      const updatedMovies = savedMovies.filter((movie) => movie.id !== data.id);
-      saveMovies(updatedMovies);
+      addMovie(data);
     }
 
-    saveLibrarySet(savedSet);
-
-    if (onToggle) onToggle(newChecked);
+    setChecked(!checked);
+    onToggle?.(!checked);
   };
 
   return (
@@ -78,8 +63,10 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
         className="hidden"
       />
       <div
-        className={`flex items-center justify-center w-full text-white bg-red-700 text-xs leading-[14px] font-medium uppercase rounded-full py-[14px] px-8 border-none transition-colors hover:bg-red-400 space-x-2 ${
-          checked ? "bg-green-600 hover:bg-green-500" : "bg-red-700"
+        className={`flex items-center justify-center w-full text-white text-xs leading-[14px] font-medium uppercase rounded-full py-[14px] px-8 border-none transition-colors space-x-2 ${
+          checked
+            ? "bg-green-600 hover:bg-green-500"
+            : "bg-red-700 hover:bg-red-400"
         }`}
       >
         <span>{checked ? "remove from queue" : "add to queue"}</span>
