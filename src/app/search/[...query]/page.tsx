@@ -1,5 +1,6 @@
-import { fetchMovies } from "@/lib/api";
-import { Movie } from "@/lib/types";
+import MovieGallery from "@/components/movie-gallery";
+import MoviePagination from "@/components/pagination";
+import { fetchMoviesByName } from "@/lib/api";
 
 export default async function SearchPage({
   params,
@@ -9,15 +10,17 @@ export default async function SearchPage({
   const query = (await params).query;
   const searchQuery = query[0] || "";
   const page = Number(query[1]) || 1;
-  const movies = await fetchMovies(searchQuery, page);
+  const response = await fetchMoviesByName(searchQuery, page);
 
   return (
-    <div>
-      <ul>
-        {movies.map((movie: Movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-    </div>
+    <section>
+      <h1 className="sr-only">Results for - {searchQuery}</h1>
+      <MovieGallery movies={response.results} />
+      <MoviePagination
+        currentPage={page}
+        totalPages={response.total_pages}
+        query={searchQuery}
+      />
+    </section>
   );
 }

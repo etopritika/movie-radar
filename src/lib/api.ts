@@ -1,3 +1,5 @@
+"use server";
+
 export async function fetchTrending(page: number = 1) {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -11,10 +13,10 @@ export async function fetchTrending(page: number = 1) {
   }
 
   const data = await response.json();
-  return data.results || [];
+  return data;
 }
 
-export async function fetchMovies(searchQuery: string, page: number = 1) {
+export async function fetchMoviesByName(searchQuery: string, page: number = 1) {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -29,5 +31,21 @@ export async function fetchMovies(searchQuery: string, page: number = 1) {
   }
 
   const data = await response.json();
-  return data.results || [];
+  return data;
+}
+
+export async function fetchMovieByID(movieId: number) {
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
+  const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movie by id");
+  }
+
+  const data = await response.json();
+  return data;
 }

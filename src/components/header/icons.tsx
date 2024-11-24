@@ -1,70 +1,61 @@
+import { useLoadingStore } from "@/store/loading";
+
+import React from "react";
+
 export const Logo = () => {
+  const isPending = useLoadingStore((state) => state.isPending);
+
   return (
-    <svg
-      className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 xl:w-[60px] xl:h-[60px]"
-      viewBox="0 0 59 59"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M48.7242 4.9165H10.2759C7.31613 4.9165 4.91675 7.31588 4.91675
-           10.2757V48.724C4.91675 51.6838 7.31613 54.0831 10.2759 54.0831H48.7242C51.684
-            54.0831 54.0834 51.6838 54.0834 48.724V10.2757C54.0834 7.31588 51.684 4.9165 48.7242 4.9165Z"
+    <>
+      <style>
+        {`
+          @keyframes spin {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        `}
+      </style>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100"
+        height="100"
+        viewBox="0 0 24 24"
+        fill="none"
         stroke="white"
-        strokeWidth="4"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-      <path
-        d="M17.2083 4.9165V54.0831"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M41.7917 4.9165V54.0831"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.91675 29.5H54.0834"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.91675 17.2085H17.2084"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.91675 41.7915H17.2084"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M41.7917 41.7915H54.0834"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M41.7917 17.2085H54.0834"
-        stroke="white"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+        className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 xl:w-[60px] xl:h-[60px]"
+      >
+        <g
+          style={{
+            animation: isPending
+              ? "spin 1s linear infinite"
+              : "spin 1s linear 1 forwards",
+            transformOrigin: "center",
+          }}
+        >
+          <circle cx="12" cy="12" r="2" />
+          <path
+            d="m13.41 10.59 5.66-5.66"
+            stroke="white"
+            strokeWidth="2"
+            fill="none"
+          />
+        </g>
+
+        <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34" />
+        <path d="M4 6h.01" />
+        <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35" />
+        <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67" />
+        <path d="M12 18h.01" />
+        <path d="M17.99 11.66A6 6 0 0 1 15.77 16.67" />
+      </svg>
+    </>
   );
 };
 
