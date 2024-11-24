@@ -10,7 +10,7 @@ interface LinkItem {
 }
 
 const links: LinkItem[] = [
-  { href: "/trending/1", label: "home" },
+  { href: "/trending/1", label: "trending" },
   { href: "/library/1", label: "library" },
 ];
 
@@ -22,8 +22,10 @@ const styles = {
     "bg-transparent text-white hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white",
 };
 
-const getLinkStyles = (pathname: string, route: string) =>
-  `${styles.base} ${pathname === route ? styles.active : styles.inactive}`;
+const getLinkStyles = (pathname: string, label: string) =>
+  `${styles.base} ${
+    pathname.includes(label) ? styles.active : styles.inactive
+  }`;
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -37,7 +39,7 @@ export default function Navigation() {
             <Link
               key={href}
               aria-current={pathname === href && "page"}
-              className={getLinkStyles(pathname, href)}
+              className={getLinkStyles(pathname, label)}
               href={href}
             >
               {label}
