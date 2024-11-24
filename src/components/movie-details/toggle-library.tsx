@@ -1,23 +1,17 @@
 import { useState, useEffect } from "react";
 import { Plus, Check } from "lucide-react";
-
-interface MovieData {
-  id: number;
-  title: string;
-  poster_path: string | null;
-  overview: string | null;
-}
+import { LocalStorageMovie } from "@/lib/types";
 
 interface ToggleLibraryProps {
-  data: MovieData;
+  data: LocalStorageMovie;
   onToggle?: (checked: boolean) => void;
 }
 
-const getSavedMovies = (): MovieData[] => {
+const getSavedMovies = (): LocalStorageMovie[] => {
   return JSON.parse(localStorage.getItem("movies") || "[]");
 };
 
-const saveMovies = (movies: MovieData[]) => {
+const saveMovies = (movies: LocalStorageMovie[]) => {
   localStorage.setItem("movies", JSON.stringify(movies));
 };
 
@@ -26,7 +20,7 @@ const isMovieSaved = (id: number): boolean => {
   return savedMovies.some((movie) => movie.id === id);
 };
 
-const addMovie = (movie: MovieData) => {
+const addMovie = (movie: LocalStorageMovie) => {
   const savedMovies = getSavedMovies();
   saveMovies([...savedMovies, movie]);
 };

@@ -10,13 +10,16 @@ import ToggleLibrary from "./toggle-library";
 const MovieDetails: React.FC = () => {
   const { data, loading } = useModal<MovieDetails>();
 
-  const posterSrc = getPosterSrc(data?.poster_path);
-  const overview = data?.overview || "Overview is not available.";
-  const genres = data?.genres?.map((genre) => genre.name).join(", ") || "N/A";
-
   if (loading) {
     return <MovieDetailsSkeleton />;
   }
+
+  const posterSrc = getPosterSrc(data?.poster_path);
+  const overview = data?.overview || "Overview is not available.";
+  const genres = data?.genres?.map((genre) => genre.name).join(", ") || "N/A";
+  const ids = data?.genres?.map(
+    (genre: { id: number; name: string }) => genre.id
+  );
 
   return (
     <div className="space-y-5 sm:flex sm:justify-between">
@@ -64,6 +67,8 @@ const MovieDetails: React.FC = () => {
             title: data.title,
             poster_path: data.poster_path,
             overview: overview,
+            genre_ids: ids,
+            release_date: data.release_date,
           }}
           onToggle={(checked) => {
             if (checked) {
