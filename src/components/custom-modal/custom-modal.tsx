@@ -9,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import { X } from "lucide-react";
 
 type Props = {
   title?: string;
@@ -44,9 +43,7 @@ const CustomModal = ({
           </DialogTitle>
           <DialogDescription>{subheading}</DialogDescription>
         </DialogHeader>
-        <button onClick={setClose} className="absolute top-2 right-2">
-          <X size={30} />
-        </button>
+        <button onClick={setClose} className="absolute top-2 right-2"></button>
         {children}
       </DialogContent>
     </Dialog>
