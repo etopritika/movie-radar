@@ -1,6 +1,6 @@
 import MovieGallery from "@/components/movie-gallery";
 import MoviePagination from "@/components/pagination";
-import { fetchMovies } from "@/lib/api";
+import { fetchMoviesByName } from "@/lib/api";
 
 export default async function SearchPage({
   params,
@@ -10,10 +10,10 @@ export default async function SearchPage({
   const query = (await params).query;
   const searchQuery = query[0] || "";
   const page = Number(query[1]) || 1;
-  const response = await fetchMovies(searchQuery, page);
+  const response = await fetchMoviesByName(searchQuery, page);
 
   return (
-    <section className="pb-10 sm:pb-12 md:pb-[60px]">
+    <section>
       <h1 className="sr-only">Results for - {searchQuery}</h1>
       <MovieGallery movies={response.results} />
       <MoviePagination

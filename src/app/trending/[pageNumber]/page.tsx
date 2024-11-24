@@ -22,7 +22,7 @@ export default async function Trending({
 
   const response = await fetchTrending(page);
   return (
-    <section className="pb-10 sm:pb-[60px]">
+    <section>
       <h1 className="sr-only">Trending Movies</h1>
       <MovieGallery movies={response.results} />
       <MoviePagination currentPage={page} totalPages={response.total_pages} />

@@ -1,4 +1,4 @@
-import { GallerySkeleton } from "@/components/gallery-skeleton/gallery-skeleton";
+import { GallerySkeleton } from "@/components/skeletons/gallery-skeleton";
 
 export default function Loading() {
   return (
