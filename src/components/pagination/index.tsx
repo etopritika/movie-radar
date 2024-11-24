@@ -11,8 +11,8 @@ import {
 import { usePathname } from "next/navigation";
 
 interface MoviePaginationProps {
-  currentPage: number;
-  totalPages: number;
+  currentPage: number | 1;
+  totalPages: number | 1;
   query?: string;
 }
 
