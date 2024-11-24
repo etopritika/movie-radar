@@ -25,10 +25,21 @@ export default function MoviePagination({
   const isFirstPage = currentPage <= 1;
   const isLastPage = currentPage >= totalPages;
 
-  const getPageHref = (page: number) =>
-    pathname.startsWith("/search")
-      ? `/search/${query}/${page}`
-      : `/trending/${page}`;
+  const routes = {
+    search: (page: number) => `/search/${query}/${page}`,
+    library: (page: number) => `/library/${page}`,
+    trending: (page: number) => `/trending/${page}`,
+  };
+
+  const getPageHref = (page: number) => {
+    if (pathname.startsWith("/search")) {
+      return routes.search(page);
+    }
+    if (pathname.startsWith("/library")) {
+      return routes.library(page);
+    }
+    return routes.trending(page);
+  };
 
   const activeClass =
     "pointer-events-none bg-white text-black border-none rounded-md";
