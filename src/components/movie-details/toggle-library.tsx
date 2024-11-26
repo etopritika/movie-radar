@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Check } from "lucide-react";
 import { LocalStorageMovie } from "@/lib/types";
+import { useLibraryStore } from "@/store/update-library";
 
 interface ToggleLibraryProps {
   data: LocalStorageMovie;
@@ -31,6 +32,7 @@ const removeMovie = (id: number) => {
 };
 
 const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
+  const triggerUpdate = useLibraryStore((state) => state.triggerUpdate);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
     } else {
       addMovie(data);
     }
-
+    triggerUpdate();
     setChecked(!checked);
     onToggle?.(!checked);
   };
