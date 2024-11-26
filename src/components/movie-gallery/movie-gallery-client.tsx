@@ -16,6 +16,7 @@ export default function MovieGalleryClient({ page }: MovieGalleryClientProps) {
   const [totalMovies, setTotalMovies] = useState(0);
 
   const itemsPerPage = 20;
+  const isMovies = movies.length > 0;
 
   useEffect(() => {
     const savedMovies = JSON.parse(localStorage.getItem("movies") || "[]");
@@ -28,6 +29,14 @@ export default function MovieGalleryClient({ page }: MovieGalleryClientProps) {
 
     setMovies(paginatedMovies);
   }, [page, updateTrigger]);
+
+  if (!isMovies) {
+    return (
+      <div className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
+        <p>Your library is empty. Add movies to appear here.</p>
+      </div>
+    );
+  }
 
   const totalPages = Math.ceil(totalMovies / itemsPerPage);
 
