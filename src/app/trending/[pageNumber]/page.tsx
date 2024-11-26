@@ -1,5 +1,6 @@
 import MovieGallery from "@/components/movie-gallery";
 import MoviePagination from "@/components/pagination";
+import RefreshButton from "@/components/refresh-button";
 import { fetchTrending } from "@/lib/api";
 
 export async function generateStaticParams() {
@@ -21,22 +22,22 @@ export default async function Trending({
   const page = Number(pageNumber) || 1;
 
   const response = await fetchTrending(page);
+  const { results, total_pages, error } = response;
+
+  if (error) {
+    return (
+      <section className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
+        <p>Error: {error}</p>
+        <RefreshButton />
+      </section>
+    );
+  }
+
   return (
     <section>
       <h1 className="sr-only">Trending Movies</h1>
-      {response.results.length > 0 ? (
-        <>
-          <MovieGallery movies={response.results} />
-          <MoviePagination
-            currentPage={page}
-            totalPages={response.total_pages}
-          />
-        </>
-      ) : (
-        <div className="flex h-[50vh] items-center justify-center text-white">
-          <p>Failed to load trending movies. Please try again later.</p>
-        </div>
-      )}
+      <MovieGallery movies={results} />
+      <MoviePagination currentPage={page} totalPages={total_pages} />
     </section>
   );
 }

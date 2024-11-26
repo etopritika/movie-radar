@@ -6,12 +6,28 @@ import { useModal } from "@/providers/modal-provider";
 import Image from "next/image";
 import { MovieDetailsSkeleton } from "../skeletons/movie-details-skeleton";
 import ToggleLibrary from "./toggle-library";
+import { Button } from "../ui/button";
+import { X } from "lucide-react";
 
 const MovieDetails: React.FC = () => {
-  const { data, loading } = useModal<MovieDetails>();
+  const { data, loading, error, setClose } = useModal<MovieDetails>();
 
   if (loading) {
     return <MovieDetailsSkeleton />;
+  }
+
+  if (error && !data) {
+    return (
+      <div className="flex flex-col items-center space-y-3 sm:space-y-5">
+        <h3 className="text-xl sm:text-2xl">Something went wrong.</h3>
+        <Button
+          onClick={setClose}
+          className="rounded-full border-none bg-red-700 px-8 py-[14px] text-xs font-medium uppercase leading-[14px] text-white transition-colors hover:bg-red-400 sm:text-sm"
+        >
+          Close windov <X />
+        </Button>
+      </div>
+    );
   }
 
   const posterSrc = getPosterSrc(data?.poster_path);
@@ -69,13 +85,6 @@ const MovieDetails: React.FC = () => {
             overview: overview,
             genre_ids: ids,
             release_date: data.release_date,
-          }}
-          onToggle={(checked) => {
-            if (checked) {
-              console.log("Додано до черги");
-            } else {
-              console.log("Видалено з черги");
-            }
           }}
         />
       </div>

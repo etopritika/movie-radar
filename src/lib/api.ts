@@ -4,14 +4,14 @@ export async function fetchTrending(page: number = 1) {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-  const url = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${page}&language=en-US`;
+  const url = `${BASE_URL}/trendin/movie/week?api_key=${API_KEY}&page=${page}&language=en-US`;
 
   try {
     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(
-        "Failed to fetch trending movies. HTTP status: ${response.status}",
+        `Failed to fetch trending movies. HTTP status: ${response.status}`,
       );
     }
 
@@ -19,7 +19,9 @@ export async function fetchTrending(page: number = 1) {
     return data;
   } catch (error) {
     console.error("Error in fetchTrending:", error);
-    return { results: [], total_pages: 0 };
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+    return { results: [], total_pages: 0, error: errorMessage };
   }
 }
 
@@ -44,7 +46,9 @@ export async function fetchMoviesByName(searchQuery: string, page: number = 1) {
     return data;
   } catch (error) {
     console.error("Error in fetchMoviesByName:", error);
-    return { results: [], total_pages: 0 };
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+    return { results: [], total_pages: 0, error: errorMessage };
   }
 }
 
