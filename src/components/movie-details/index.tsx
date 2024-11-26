@@ -18,7 +18,7 @@ const MovieDetails: React.FC = () => {
   const overview = data?.overview || "Overview is not available.";
   const genres = data?.genres?.map((genre) => genre.name).join(", ") || "N/A";
   const ids = data?.genres?.map(
-    (genre: { id: number; name: string }) => genre.id
+    (genre: { id: number; name: string }) => genre.id,
   );
 
   return (
@@ -28,36 +28,36 @@ const MovieDetails: React.FC = () => {
         width={375}
         height={478}
         alt="Movie poster"
-        className="w-full h-fit rounded-[5px] sm:w-[254px] md:w-[264px] xl:w-[375px]"
+        className="h-fit w-full rounded-[5px] sm:w-[254px] md:w-[264px] xl:w-[375px]"
       />
       <div className="space-y-5 sm:max-w-[240px] md:max-w-[264px] xl:max-w-[391px]">
-        <h2 className="text-xl leading-6 font-medium xl:text-3xl">
+        <h2 className="text-xl font-medium leading-6 xl:text-3xl">
           {data.title}
         </h2>
-        <dl className="text-xs font-medium leading-4 space-y-2">
+        <dl className="space-y-2 text-xs font-medium leading-4">
           <div className="flex">
-            <dt className="text-mutedGray min-w-[108px]">Vote / Votes</dt>
+            <dt className="min-w-[108px] text-mutedGray">Vote / Votes</dt>
             <dd className="leading-[14px]">
-              <span className="border-none bg-red-700 text-white px-2.5 py-[1px] rounded">
+              <span className="rounded border-none bg-red-700 px-2.5 py-[1px] text-white">
                 {data.vote_average}
               </span>{" "}
               / {data.vote_count}
             </dd>
           </div>
           <div className="flex">
-            <dt className="text-mutedGray min-w-[108px]">Popularity</dt>
+            <dt className="min-w-[108px] text-mutedGray">Popularity</dt>
             <dd className="leading-[14px]">{data.popularity}</dd>
           </div>
           <div className="flex">
-            <dt className="text-mutedGray min-w-[108px]">Original Title</dt>
+            <dt className="min-w-[108px] text-mutedGray">Original Title</dt>
             <dd>{data.original_title}</dd>
           </div>
           <div className="flex">
-            <dt className="text-mutedGray min-w-[108px]">Genre</dt>
+            <dt className="min-w-[108px] text-mutedGray">Genre</dt>
             <dd>{genres}</dd>
           </div>
         </dl>
-        <div className="font-medium text-xs space-y-2">
+        <div className="space-y-2 text-xs font-medium">
           <span className="uppercase leading-4">About</span>
           <p className="leading-5">{overview}</p>
         </div>

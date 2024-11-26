@@ -31,8 +31,8 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-col justify-between items-center h-full sm:items-start">
-      <div className="w-full flex flex-col-reverse sm:flex-row sm:space-x-2">
+    <nav className="flex h-full flex-col items-center justify-between sm:items-start">
+      <div className="flex w-full flex-col-reverse sm:flex-row sm:space-x-2">
         <SearchMovieForm />
         <div className="flex items-center space-x-2">
           {links.map(({ href, label }) => (
@@ -49,7 +49,7 @@ export default function Navigation() {
       </div>
       <Link href="/" className="flex items-center space-x-2">
         <Logo />
-        <span className="text-white text-2xl font-medium sm:text-4xl xl:text-[60px]">
+        <span className="text-2xl font-medium text-white sm:text-4xl xl:text-[60px]">
           Movie-Radar
         </span>
       </Link>

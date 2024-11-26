@@ -51,7 +51,7 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
   };
 
   return (
-    <label className="flex items-center justify-center w-full">
+    <label className="flex w-full items-center justify-center">
       <input
         type="checkbox"
         checked={checked}
@@ -59,7 +59,7 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
         className="hidden"
       />
       <div
-        className={`flex items-center justify-center w-full text-white text-xs leading-[14px] font-medium uppercase rounded-full py-[14px] px-8 border-none transition-colors space-x-2 ${
+        className={`flex w-full items-center justify-center space-x-2 rounded-full border-none px-8 py-[14px] text-xs font-medium uppercase leading-[14px] text-white transition-colors ${
           checked
             ? "bg-green-600 hover:bg-green-500"
             : "bg-red-700 hover:bg-red-400"

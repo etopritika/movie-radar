@@ -49,7 +49,7 @@ export default function MoviePagination({
     page: number,
     isActive: boolean,
     additionalClass = "",
-    hiddenSuffix = ""
+    hiddenSuffix = "",
   ) => (
     <PaginationItem
       key={`page-${page}${hiddenSuffix}`}
@@ -74,7 +74,7 @@ export default function MoviePagination({
       }
     } else {
       pages.push(
-        createPageLink(1, currentPage === 1, "hidden sm:flex", "-hidden")
+        createPageLink(1, currentPage === 1, "hidden sm:flex", "-hidden"),
       );
 
       if (currentPage > 4) {
@@ -82,7 +82,7 @@ export default function MoviePagination({
           <PaginationEllipsis
             key={`start-ellipsis-${currentPage}`}
             className="hidden sm:flex"
-          />
+          />,
         );
       }
 
@@ -103,7 +103,7 @@ export default function MoviePagination({
           <PaginationEllipsis
             key={`end-ellipsis-${currentPage}`}
             className="hidden sm:flex"
-          />
+          />,
         );
       }
 
@@ -112,13 +112,13 @@ export default function MoviePagination({
           totalPages,
           currentPage === totalPages,
           "hidden sm:flex",
-          "-hidden"
-        )
+          "-hidden",
+        ),
       );
 
       if (currentPage >= totalPages - 3) {
         pages.push(
-          createPageLink(totalPages, currentPage === totalPages, "sm:hidden")
+          createPageLink(totalPages, currentPage === totalPages, "sm:hidden"),
         );
       }
     }

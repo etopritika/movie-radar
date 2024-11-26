@@ -35,24 +35,24 @@ export default function MovieCard({
       <CustomModal
         title=""
         subheading=""
-        className="bg-white px-7 pt-12 pb-10 max-w-[280px] sm:max-w-[576px] md:max-w-[704px] xl:max-w-[806px] md:pt-10 md:px-9 md:pb-16 md:pr-[72px] xl:py-10 xl:px-3"
+        className="max-w-[280px] bg-white px-7 pb-10 pt-12 sm:max-w-[576px] md:max-w-[704px] md:px-9 md:pb-16 md:pr-[72px] md:pt-10 xl:max-w-[806px] xl:px-3 xl:py-10"
       >
         <MovieDetails />
       </CustomModal>,
       () => fetchMovieByID(id),
-      id
+      id,
     );
   };
 
   return (
-    <li className="relative transition-transform duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_18px_rgba(255,0,0,0.6)] rounded-[10px] sm:rounded-[15px] overflow-hidden border-none">
-      <button onClick={handleOpenModal} className="w-full h-full">
+    <li className="relative overflow-hidden rounded-[10px] border-none transition-transform duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_18px_rgba(255,0,0,0.6)] sm:rounded-[15px]">
+      <button onClick={handleOpenModal} className="h-full w-full">
         <Image
           src={posterSrc}
           alt={overview || "No overview available"}
           width={500}
           height={500}
-          className="w-full h-full"
+          className="h-full w-full"
         />
         <div className="sr-only">
           <h3>{title}</h3>

@@ -33,7 +33,7 @@ export default function RootLayout({
         <ModalProvider>
           <div className="container px-5 pt-5 sm:px-8 sm:pt-8">
             <Header />
-            <main className="pt-5 pb-10 sm:pt-8 sm:pb-[60px]">{children}</main>
+            <main className="pb-10 pt-5 sm:pb-[60px] sm:pt-8">{children}</main>
           </div>
         </ModalProvider>
       </body>
