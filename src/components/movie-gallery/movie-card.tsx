@@ -50,8 +50,8 @@ export default function MovieCard({
         <Image
           src={posterSrc}
           alt={overview || "No overview available"}
-          width={500}
-          height={500}
+          width={394}
+          height={574}
           className="h-full w-full"
         />
         <div className="sr-only">

@@ -43,7 +43,7 @@ export default function MoviePagination({
 
   const activeClass =
     "pointer-events-none bg-white text-black border-none rounded-md";
-  const inactiveClass = "hover:bg-red-400";
+  const inactiveClass = "hover:bg-red-400 transition-colors";
 
   const createPageLink = (
     page: number,
@@ -127,7 +127,9 @@ export default function MoviePagination({
   };
 
   const buttonClassName = (isDisabled: boolean) =>
-    isDisabled ? "text-gray-400 cursor-not-allowed" : "hover:bg-red-400";
+    isDisabled
+      ? "text-gray-400 cursor-not-allowed"
+      : "hover:bg-red-400 transition-colors";
 
   return (
     <Pagination className="text-white">
