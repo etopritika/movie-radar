@@ -1,6 +1,6 @@
 import MovieGallery from "@/components/movie-gallery";
 import MoviePagination from "@/components/pagination";
-import RefreshButton from "@/components/refresh-button";
+import RefreshButton from "@/components/custom-buttons/refresh-button";
 import { fetchTrending } from "@/lib/api";
 
 export async function generateStaticParams() {
