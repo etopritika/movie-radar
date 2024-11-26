@@ -15,7 +15,7 @@ const links: LinkItem[] = [
 ];
 
 const styles = {
-  base: "rounded-full py-3 px-6 text-xs leading-4 font-medium uppercase sm:flex sm:items-center xl:px-8 xl:py-4 transition duration-300",
+  base: "rounded-full py-3 px-6 text-xs leading-4 font-medium uppercase sm:flex sm:items-center xl:px-8 xl:py-4 transition-colors",
   active:
     "bg-white text-black hover:bg-white focus:bg-white focus:text-black hover:text-black",
   inactive:

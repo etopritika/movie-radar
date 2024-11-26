@@ -5,7 +5,6 @@ import { useLibraryStore } from "@/store/update-library";
 
 interface ToggleLibraryProps {
   data: LocalStorageMovie;
-  onToggle?: (checked: boolean) => void;
 }
 
 const getSavedMovies = (): LocalStorageMovie[] => {
@@ -31,7 +30,7 @@ const removeMovie = (id: number) => {
   saveMovies(savedMovies.filter((movie) => movie.id !== id));
 };
 
-const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
+const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
   const triggerUpdate = useLibraryStore((state) => state.triggerUpdate);
   const [checked, setChecked] = useState(false);
 
@@ -47,7 +46,6 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data, onToggle }) => {
     }
     triggerUpdate();
     setChecked(!checked);
-    onToggle?.(!checked);
   };
 
   return (
