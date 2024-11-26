@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header";
 import ModalProvider from "@/providers/modal-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,6 +37,7 @@ export default function RootLayout({
             <main className="pb-10 pt-5 sm:pb-[60px] sm:pt-8">{children}</main>
           </div>
         </ModalProvider>
+        <Toaster />
       </body>
     </html>
   );
