@@ -17,6 +17,7 @@ type ModalContextType<T> = {
   setClose: () => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ModalContext = createContext<ModalContextType<any> | undefined>(
   undefined
 );
