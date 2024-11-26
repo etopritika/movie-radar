@@ -24,8 +24,19 @@ export default async function Trending({
   return (
     <section>
       <h1 className="sr-only">Trending Movies</h1>
-      <MovieGallery movies={response.results} />
-      <MoviePagination currentPage={page} totalPages={response.total_pages} />
+      {response.results.length > 0 ? (
+        <>
+          <MovieGallery movies={response.results} />
+          <MoviePagination
+            currentPage={page}
+            totalPages={response.total_pages}
+          />
+        </>
+      ) : (
+        <div className="flex h-[50vh] items-center justify-center text-white">
+          <p>Failed to load trending movies. Please try again later.</p>
+        </div>
+      )}
     </section>
   );
 }

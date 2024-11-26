@@ -6,14 +6,19 @@ export async function fetchTrending(page: number = 1) {
 
   const url = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${page}&language=en-US`;
 
-  const response = await fetch(url);
+  try {
+    const response = await fetch(url);
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch trending movies");
+    if (!response.ok) {
+      throw new Error("Failed to fetch trending movies");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error in fetchTrending:", error);
+    return { results: [], total_pages: 0 };
   }
-
-  const data = await response.json();
-  return data;
 }
 
 export async function fetchMoviesByName(searchQuery: string, page: number = 1) {
@@ -21,7 +26,7 @@ export async function fetchMoviesByName(searchQuery: string, page: number = 1) {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
   const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-    searchQuery
+    searchQuery,
   )}&page=${page}&language=en-US&include_adult=false`;
 
   const response = await fetch(url);
