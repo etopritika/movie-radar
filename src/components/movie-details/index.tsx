@@ -28,7 +28,7 @@ const MovieDetails: React.FC = () => {
         width={375}
         height={478}
         alt="Movie poster"
-        className="w-[240px] rounded-[5px] sm:w-[254px] sm:h-fit md:w-[264px] xl:w-[375px]"
+        className="w-full h-fit rounded-[5px] sm:w-[254px] md:w-[264px] xl:w-[375px]"
       />
       <div className="space-y-5 sm:max-w-[240px] md:max-w-[264px] xl:max-w-[391px]">
         <h2 className="text-xl leading-6 font-medium xl:text-3xl">
