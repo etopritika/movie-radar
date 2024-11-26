@@ -48,11 +48,11 @@ export default function MovieCard({
     <li className="relative transition-transform duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_18px_rgba(255,0,0,0.6)] rounded-[10px] sm:rounded-[15px] overflow-hidden border-none">
       <button onClick={handleOpenModal} className="w-full h-full">
         <Image
-          className="w-full h-full object-cover"
           src={posterSrc}
           alt={overview || "No overview available"}
-          width={395}
-          height={574}
+          width={500}
+          height={500}
+          className="w-full h-full"
         />
         <div className="sr-only">
           <h3>{title}</h3>
