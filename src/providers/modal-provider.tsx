@@ -13,7 +13,11 @@ type ModalContextType<T> = {
   error: string | null;
   loading: boolean;
   isOpen: boolean;
-  setOpen: (modal: React.ReactNode, fetchData?: () => Promise<T>) => void;
+  setOpen: (
+    modal: React.ReactNode,
+    fetchData?: () => Promise<T>,
+    id?: number
+  ) => void;
   setClose: () => void;
 };
 
@@ -28,12 +32,20 @@ const ModalProvider = <T,>({ children }: ModalProviderProps) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [showingModal, setShowingModal] = useState<React.ReactNode>(null);
+  const [lastFetchedId, setLastFetchedId] = useState<number | null>(null);
 
   const setOpen = async (
     modal: React.ReactNode,
-    fetchData?: () => Promise<T>
+    fetchData?: (id?: number) => Promise<T>,
+    id?: number
   ) => {
     setError(null);
+
+    if (id && id === lastFetchedId) {
+      setShowingModal(modal);
+      setIsOpen(true);
+      return;
+    }
     setData(null);
     setLoading(true);
     setShowingModal(modal);
@@ -41,6 +53,9 @@ const ModalProvider = <T,>({ children }: ModalProviderProps) => {
 
     if (fetchData) {
       try {
+        if (id) {
+          setLastFetchedId(id);
+        }
         const fetchedData = await fetchData();
         setData(fetchedData);
       } catch (err: unknown) {
@@ -60,7 +75,6 @@ const ModalProvider = <T,>({ children }: ModalProviderProps) => {
 
   const setClose = () => {
     setIsOpen(false);
-    setData(null);
     setError(null);
     setLoading(false);
     setShowingModal(null);

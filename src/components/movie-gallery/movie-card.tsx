@@ -39,7 +39,8 @@ export default function MovieCard({
       >
         <MovieDetails />
       </CustomModal>,
-      () => fetchMovieByID(id)
+      () => fetchMovieByID(id),
+      id
     );
   };
 
