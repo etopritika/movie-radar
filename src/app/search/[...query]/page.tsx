@@ -31,7 +31,11 @@ export default async function SearchPage({
       {isResult ? (
         <>
           <MovieGallery movies={results} />
-          <MoviePagination currentPage={page} totalPages={total_pages} />
+          <MoviePagination
+            currentPage={page}
+            totalPages={total_pages}
+            query={searchQuery}
+          />
         </>
       ) : (
         <div className="flex h-[50vh] items-center justify-center text-white">
