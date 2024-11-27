@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useModal } from "@/providers/modal-provider";
-import CustomModal from "../custom-modal/custom-modal";
+import CustomModal from "../custom-modal";
 import MovieDetails from "../movie-details";
 import { fetchMovieByID } from "@/lib/api";
 import { getFormattedDate, getGenreList, getPosterSrc } from "@/lib/helpers";
