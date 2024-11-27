@@ -38,7 +38,7 @@ const MovieDetails: React.FC = () => {
   );
 
   return (
-    <div className="space-y-5 sm:flex sm:justify-between">
+    <div className="space-y-5 sm:flex sm:justify-between sm:space-y-0">
       <Image
         src={posterSrc}
         width={375}
@@ -46,7 +46,7 @@ const MovieDetails: React.FC = () => {
         alt="Movie poster"
         className="h-fit w-full rounded-[5px] sm:w-[254px] md:w-[264px] xl:w-[375px]"
       />
-      <div className="space-y-5 sm:max-w-[240px] md:max-w-[264px] xl:max-w-[391px]">
+      <div className="space-y-5 sm:w-full sm:max-w-[240px] md:max-w-[264px] xl:max-w-[391px]">
         <h2 className="text-xl font-medium leading-6 xl:text-3xl">
           {data.title}
         </h2>
