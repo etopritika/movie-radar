@@ -45,13 +45,16 @@ export default function MovieCard({
   };
 
   return (
-    <li className="relative overflow-hidden rounded-[10px] border-none transition-transform duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_18px_rgba(255,0,0,0.6)] sm:rounded-[15px]">
-      <button onClick={handleOpenModal} className="h-full w-full">
+    <li>
+      <button
+        onClick={handleOpenModal}
+        className="relative h-full w-full overflow-hidden rounded-[10px] border-none transition-transform duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_18px_rgba(255,0,0,0.6)] sm:rounded-[15px]"
+      >
         <Image
           src={posterSrc}
           alt={overview || "No overview available"}
-          width={394}
-          height={574}
+          width={300}
+          height={450}
           className="h-full w-full"
         />
         <div className="sr-only">
