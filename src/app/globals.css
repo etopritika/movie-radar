@@ -6,11 +6,17 @@
   --white: #ffffff;
   --black: #000000;
   --background: #250900;
+  --destructive: #ef4444;
 }
 
 * {
   margin: 0;
   padding: 0;
+}
+
+ol,
+ul {
+  list-style-type: none;
 }
 
 body {

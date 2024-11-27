@@ -39,19 +39,16 @@ export default function SearchMovieForm() {
                 <Input
                   {...field}
                   placeholder="Search movies..."
-                  className="px-3.5 py-2.5 border-none rounded-full text-xs text-black leading-[14px] placeholder-black font-normal bg-white
-                  sm:text-sm sm:leading-4 sm:max-w-[165px] sm:py-[11px] sm:px-4
-                  md:text-sm md:leading-4 md:py-[11px] md:px-4 md:max-w-[165px] 
-                  xl:py-[13px] xl:max-w-[187px]"
+                  className="rounded-full border-none bg-white px-3.5 py-2.5 text-xs font-normal leading-[14px] text-black placeholder-black sm:max-w-[165px] sm:px-4 sm:py-[11px] sm:text-sm sm:leading-4 md:max-w-[165px] md:px-4 md:py-[11px] md:text-sm md:leading-4 xl:max-w-[187px] xl:py-[13px]"
                 />
               </FormControl>
               <button
                 type="submit"
-                className="absolute mt-0 top-2.5 right-3.5 sm:top-[11px] sm:right-4 md:top-[13px]"
+                className="absolute right-3.5 top-2.5 mt-0 sm:right-4 sm:top-[11px] md:top-[13px]"
               >
                 <Search />
               </button>
-              <FormMessage className="absolute -bottom-4 left-[14px] text-white text-[10px] font-normal leading-3 sm:left-[16px]" />
+              <FormMessage className="absolute -bottom-4 left-[14px] text-[10px] font-normal leading-3 text-white sm:left-[16px]" />
             </FormItem>
           )}
         />

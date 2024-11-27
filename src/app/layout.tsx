@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header";
 import ModalProvider from "@/providers/modal-provider";
+import { Toaster } from "@/components/ui/toaster";
+import ScrollUpButton from "@/components/custom-buttons/scroll-up-button";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,9 +35,11 @@ export default function RootLayout({
         <ModalProvider>
           <div className="container px-5 pt-5 sm:px-8 sm:pt-8">
             <Header />
-            <main className="pt-5 pb-10 sm:pt-8 sm:pb-[60px]">{children}</main>
+            <main className="pb-10 pt-5 sm:pb-[60px] sm:pt-8">{children}</main>
+            <ScrollUpButton />
           </div>
         </ModalProvider>
+        <Toaster />
       </body>
     </html>
   );

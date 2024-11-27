@@ -31,8 +31,8 @@ const CustomModal = ({
 
   return (
     <Dialog open={isOpen || defaultOpen} onOpenChange={setClose}>
-      <DialogContent className={clsx("md:h-fit bg-card relative ", className)}>
-        <DialogHeader className="text-left sr-only">
+      <DialogContent className={clsx("relative bg-card md:h-fit", className)}>
+        <DialogHeader className="sr-only text-left">
           <DialogTitle
             className={clsx("text-2xl font-bold", {
               "text-left": !centeredHeading,
@@ -43,7 +43,7 @@ const CustomModal = ({
           </DialogTitle>
           <DialogDescription>{subheading}</DialogDescription>
         </DialogHeader>
-        <button onClick={setClose} className="absolute top-2 right-2"></button>
+        <button onClick={setClose} className="absolute right-2 top-2"></button>
         {children}
       </DialogContent>
     </Dialog>

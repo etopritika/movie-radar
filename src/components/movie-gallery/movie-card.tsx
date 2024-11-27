@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useModal } from "@/providers/modal-provider";
-import CustomModal from "../custom-modal/custom-modal";
+import CustomModal from "../custom-modal";
 import MovieDetails from "../movie-details";
 import { fetchMovieByID } from "@/lib/api";
 import { getFormattedDate, getGenreList, getPosterSrc } from "@/lib/helpers";
@@ -13,7 +13,7 @@ interface MovieCardProps {
   poster_path: string | null;
   overview: string;
   release_date: string;
-  genre_ids: number[];
+  genre_ids?: number[];
 }
 
 export default function MovieCard({
@@ -35,23 +35,27 @@ export default function MovieCard({
       <CustomModal
         title=""
         subheading=""
-        className="bg-white px-7 pt-12 pb-10 max-w-[280px] sm:max-w-[576px] md:max-w-[704px] xl:max-w-[806px] md:pt-10 md:px-9 md:pb-16 md:pr-[72px] xl:py-10 xl:px-3"
+        className="max-w-[280px] bg-white px-7 pb-10 pt-12 sm:max-w-[576px] md:max-w-[704px] md:px-9 md:pb-16 md:pr-[72px] md:pt-10 xl:max-w-[806px] xl:px-3 xl:py-10"
       >
         <MovieDetails />
       </CustomModal>,
-      () => fetchMovieByID(id)
+      () => fetchMovieByID(id),
+      id,
     );
   };
 
   return (
-    <li className="relative transition-transform duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_18px_rgba(255,0,0,0.6)] rounded-[10px] sm:rounded-[15px] overflow-hidden border-none">
-      <button onClick={handleOpenModal} className="w-full h-full">
+    <li>
+      <button
+        onClick={handleOpenModal}
+        className="relative h-full w-full overflow-hidden rounded-[10px] border-none transition-transform duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_18px_rgba(255,0,0,0.6)] sm:rounded-[15px]"
+      >
         <Image
-          className="h-full w-full max-h-[402px] sm:max-h-[455px] md:max-h-[455px] xl:max-h-[574px]"
           src={posterSrc}
           alt={overview || "No overview available"}
-          width={395}
-          height={574}
+          width={300}
+          height={450}
+          className="h-full w-full"
         />
         <div className="sr-only">
           <h3>{title}</h3>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useToast } from "@/hooks/use-toast";
 import React, { createContext, useContext, useState } from "react";
 
 interface ModalProviderProps {
@@ -13,26 +14,38 @@ type ModalContextType<T> = {
   error: string | null;
   loading: boolean;
   isOpen: boolean;
-  setOpen: (modal: React.ReactNode, fetchData?: () => Promise<T>) => void;
+  setOpen: (
+    modal: React.ReactNode,
+    fetchData?: () => Promise<T>,
+    id?: number,
+  ) => void;
   setClose: () => void;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ModalContext = createContext<ModalContextType<any> | undefined>(
-  undefined
+  undefined,
 );
 
 const ModalProvider = <T,>({ children }: ModalProviderProps) => {
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<ModalData<T> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [showingModal, setShowingModal] = useState<React.ReactNode>(null);
+  const [lastFetchedId, setLastFetchedId] = useState<number | null>(null);
 
   const setOpen = async (
     modal: React.ReactNode,
-    fetchData?: () => Promise<T>
+    fetchData?: (id?: number) => Promise<T>,
+    id?: number,
   ) => {
+    if (id && id === lastFetchedId && !error) {
+      setShowingModal(modal);
+      setIsOpen(true);
+      return;
+    }
     setError(null);
     setData(null);
     setLoading(true);
@@ -41,12 +54,25 @@ const ModalProvider = <T,>({ children }: ModalProviderProps) => {
 
     if (fetchData) {
       try {
+        if (id) {
+          setLastFetchedId(id);
+        }
         const fetchedData = await fetchData();
         setData(fetchedData);
       } catch (err: unknown) {
         if (err instanceof Error) {
+          toast({
+            title: "Oops",
+            description: err.message,
+            variant: "destructive",
+          });
           setError(err.message);
         } else {
+          toast({
+            title: "Oops",
+            description: "Unexpected error occurred",
+            variant: "destructive",
+          });
           setError("Unexpected error occurred");
         }
         console.error("Error in setOpen:", err);
@@ -60,8 +86,6 @@ const ModalProvider = <T,>({ children }: ModalProviderProps) => {
 
   const setClose = () => {
     setIsOpen(false);
-    setData(null);
-    setError(null);
     setLoading(false);
     setShowingModal(null);
   };

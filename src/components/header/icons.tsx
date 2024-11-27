@@ -29,7 +29,7 @@ export const Logo = () => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 xl:w-[60px] xl:h-[60px]"
+        className="h-8 w-8 sm:h-10 sm:w-10 md:h-10 md:w-10 xl:h-[60px] xl:w-[60px]"
       >
         <g
           style={{
@@ -62,7 +62,7 @@ export const Logo = () => {
 export const Search = () => {
   return (
     <svg
-      className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+      className="h-3.5 w-3.5 sm:h-4 sm:w-4"
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
