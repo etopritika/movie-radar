@@ -38,7 +38,7 @@ const MovieDetails: React.FC = () => {
   );
 
   return (
-    <div className="space-y-5 sm:flex sm:justify-between">
+    <div className="space-y-5 sm:flex sm:justify-between sm:space-y-0">
       <Image
         src={posterSrc}
         width={375}
@@ -46,7 +46,7 @@ const MovieDetails: React.FC = () => {
         alt="Movie poster"
         className="h-fit w-full rounded-[5px] sm:w-[254px] md:w-[264px] xl:w-[375px]"
       />
-      <div className="space-y-5 sm:max-w-[240px] md:max-w-[264px] xl:max-w-[391px]">
+      <div className="space-y-5 sm:w-full sm:max-w-[240px] md:max-w-[264px] xl:max-w-[391px]">
         <h2 className="text-xl font-medium leading-6 xl:text-3xl">
           {data.title}
         </h2>
@@ -55,28 +55,29 @@ const MovieDetails: React.FC = () => {
             <dt className="min-w-[108px] text-mutedGray">Vote / Votes</dt>
             <dd className="leading-[14px]">
               <span className="rounded border-none bg-red-700 px-2.5 py-[1px] text-white">
-                {data.vote_average}
+                {data.vote_average ?? "---"}
               </span>{" "}
-              / {data.vote_count}
+              / {data.vote_count ?? "---"}
             </dd>
           </div>
           <div className="flex">
             <dt className="min-w-[108px] text-mutedGray">Popularity</dt>
-            <dd className="leading-[14px]">{data.popularity}</dd>
+            <dd className="leading-[14px]">{data.popularity ?? "---"}</dd>
           </div>
           <div className="flex">
             <dt className="min-w-[108px] text-mutedGray">Original Title</dt>
-            <dd>{data.original_title}</dd>
+            <dd>{data.original_title || "---"}</dd>
           </div>
           <div className="flex">
             <dt className="min-w-[108px] text-mutedGray">Genre</dt>
-            <dd>{genres}</dd>
+            <dd>{genres || "---"}</dd>
           </div>
         </dl>
         <div className="space-y-2 text-xs font-medium">
           <span className="uppercase leading-4">About</span>
-          <p className="leading-5">{overview}</p>
+          <p className="leading-5">{overview || "---"}</p>
         </div>
+
         <ToggleLibrary
           data={{
             id: data.id,
