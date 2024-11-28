@@ -33,7 +33,7 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
             : "bg-red-700 hover:bg-red-400"
         }`}
       >
-        <span>{isChecked ? "remove from favorites" : "add to favorites"}</span>
+        <span>{isChecked ? "remove from library" : "add to library"}</span>
         {isChecked ? <Check /> : <Bookmark />}
       </div>
     </label>
