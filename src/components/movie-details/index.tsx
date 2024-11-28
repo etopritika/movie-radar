@@ -1,6 +1,6 @@
 "use client";
 
-import { getPosterSrc } from "@/lib/helpers";
+import { getFormattedDate, getPosterSrc } from "@/lib/helpers";
 import type { MovieDetails } from "@/lib/types";
 import { useModal } from "@/providers/modal-provider";
 import Image from "next/image";
@@ -21,7 +21,7 @@ export default function MovieDetails({ movieId }: MovieDetailsProps) {
     movieId ? `/movie/${movieId}` : null,
     () => fetchMovieByID(movieId),
   );
-
+  console.log("Movie details:", data);
   if (isLoading) {
     return <MovieDetailsSkeleton />;
   }
@@ -72,8 +72,10 @@ export default function MovieDetails({ movieId }: MovieDetailsProps) {
             </dd>
           </div>
           <div className="flex">
-            <dt className="min-w-[108px] text-mutedGray">Popularity</dt>
-            <dd className="leading-[14px]">{data.popularity ?? "---"}</dd>
+            <dt className="min-w-[108px] text-mutedGray">Release Date</dt>
+            <dd className="leading-[14px]">
+              {getFormattedDate(data.release_date)}
+            </dd>
           </div>
           <div className="flex">
             <dt className="min-w-[108px] text-mutedGray">Original Title</dt>
