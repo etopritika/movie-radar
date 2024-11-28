@@ -1,4 +1,4 @@
-import { Plus, Check } from "lucide-react";
+import { Check, Bookmark } from "lucide-react";
 import { LocalStorageMovie } from "@/lib/types";
 import { useMoviesStore } from "@/store/use-movie-store";
 
@@ -33,8 +33,8 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
             : "bg-red-700 hover:bg-red-400"
         }`}
       >
-        <span>{isChecked ? "remove from queue" : "add to queue"}</span>
-        {isChecked ? <Check /> : <Plus />}
+        <span>{isChecked ? "remove from favorites" : "add to favorites"}</span>
+        {isChecked ? <Check /> : <Bookmark />}
       </div>
     </label>
   );
