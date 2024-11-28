@@ -1,6 +1,6 @@
 import MovieGalleryClient from "@/components/movie-gallery/movie-gallery-client";
 
-export default async function Library({
+export default async function MovieLibraryPage({
   params,
 }: {
   params: Promise<{ pageNumber: string }>;
