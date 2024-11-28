@@ -8,11 +8,21 @@ import { MovieDetailsSkeleton } from "../skeletons/movie-details-skeleton";
 import ToggleLibrary from "./toggle-library";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
+import useSWR from "swr";
+import { fetchMovieByID } from "@/lib/api";
 
-const MovieDetails: React.FC = () => {
-  const { data, loading, error, setClose } = useModal<MovieDetails>();
+type MovieDetailsProps = {
+  movieId: number;
+};
 
-  if (loading) {
+export default function MovieDetails({ movieId }: MovieDetailsProps) {
+  const { setClose } = useModal();
+  const { data, error, isLoading } = useSWR<MovieDetails>(
+    movieId ? `/movie/${movieId}` : null,
+    () => fetchMovieByID(movieId),
+  );
+
+  if (isLoading) {
     return <MovieDetailsSkeleton />;
   }
 
@@ -92,6 +102,4 @@ const MovieDetails: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default MovieDetails;
+}
