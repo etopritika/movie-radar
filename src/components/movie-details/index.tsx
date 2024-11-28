@@ -16,12 +16,13 @@ const MovieDetails: React.FC = () => {
     return <MovieDetailsSkeleton />;
   }
 
-  if (error && !data) {
+  if (error || !data) {
     return (
       <div className="flex flex-col items-center space-y-3 sm:space-y-5">
         <h3 className="text-xl sm:text-2xl">Something went wrong.</h3>
         <Button
           onClick={setClose}
+          aria-label="Close modal"
           className="rounded-full border-none bg-red-700 px-8 py-[14px] text-xs font-medium uppercase leading-[14px] text-white transition-colors hover:bg-red-400 sm:text-sm"
         >
           Close windov <X />
