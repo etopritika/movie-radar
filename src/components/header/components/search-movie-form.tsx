@@ -44,6 +44,7 @@ export default function SearchMovieForm() {
               </FormControl>
               <button
                 type="submit"
+                aria-label="Search movies"
                 className="absolute right-3.5 top-2.5 mt-0 sm:right-4 sm:top-[11px] md:top-[13px]"
               >
                 <Search />

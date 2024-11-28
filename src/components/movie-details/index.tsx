@@ -1,6 +1,6 @@
 "use client";
 
-import { getPosterSrc } from "@/lib/helpers";
+import { getFormattedDate, getPosterSrc } from "@/lib/helpers";
 import type { MovieDetails } from "@/lib/types";
 import { useModal } from "@/providers/modal-provider";
 import Image from "next/image";
@@ -8,20 +8,31 @@ import { MovieDetailsSkeleton } from "../skeletons/movie-details-skeleton";
 import ToggleLibrary from "./toggle-library";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
+import useSWR from "swr";
+import { fetchMovieByID } from "@/lib/api";
 
-const MovieDetails: React.FC = () => {
-  const { data, loading, error, setClose } = useModal<MovieDetails>();
+type MovieDetailsProps = {
+  movieId: number;
+};
 
-  if (loading) {
+export default function MovieDetails({ movieId }: MovieDetailsProps) {
+  const { setClose } = useModal();
+  const { data, error, isLoading } = useSWR<MovieDetails>(
+    movieId ? `/movie/${movieId}` : null,
+    () => fetchMovieByID(movieId),
+  );
+  console.log("Movie details:", data);
+  if (isLoading) {
     return <MovieDetailsSkeleton />;
   }
 
-  if (error && !data) {
+  if (error || !data) {
     return (
       <div className="flex flex-col items-center space-y-3 sm:space-y-5">
         <h3 className="text-xl sm:text-2xl">Something went wrong.</h3>
         <Button
           onClick={setClose}
+          aria-label="Close modal"
           className="rounded-full border-none bg-red-700 px-8 py-[14px] text-xs font-medium uppercase leading-[14px] text-white transition-colors hover:bg-red-400 sm:text-sm"
         >
           Close windov <X />
@@ -61,8 +72,10 @@ const MovieDetails: React.FC = () => {
             </dd>
           </div>
           <div className="flex">
-            <dt className="min-w-[108px] text-mutedGray">Popularity</dt>
-            <dd className="leading-[14px]">{data.popularity ?? "---"}</dd>
+            <dt className="min-w-[108px] text-mutedGray">Release Date</dt>
+            <dd className="leading-[14px]">
+              {getFormattedDate(data.release_date)}
+            </dd>
           </div>
           <div className="flex">
             <dt className="min-w-[108px] text-mutedGray">Original Title</dt>
@@ -91,6 +104,4 @@ const MovieDetails: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default MovieDetails;
+}

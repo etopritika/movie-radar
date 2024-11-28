@@ -29,6 +29,7 @@ export default function ScrollUpButton() {
     isVisible && (
       <Button
         onClick={handleScrollUp}
+        aria-label="Scroll to top"
         className="fixed bottom-4 right-4 z-50 rounded-full border-none bg-red-700 p-4 transition-colors hover:bg-red-400 md:p-6"
       >
         <ChevronsUp className="text-white" />

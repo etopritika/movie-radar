@@ -3,7 +3,7 @@ import MoviePagination from "@/components/pagination";
 import RefreshButton from "@/components/custom-buttons/refresh-button";
 import { fetchMoviesByName } from "@/lib/api";
 
-export default async function SearchPage({
+export default async function MovieSearchPage({
   params,
 }: {
   params: Promise<{ query: string[] }>;
@@ -23,7 +23,7 @@ export default async function SearchPage({
     );
   }
 
-  const isResult = results.length > 0;
+  const isResult = results?.length > 0;
 
   return (
     <section>

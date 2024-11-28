@@ -14,14 +14,12 @@ type Props = {
   title?: string;
   subheading?: string;
   children: React.ReactNode;
-  defaultOpen?: boolean;
   className?: string;
   centeredHeading?: boolean;
 };
 
 const CustomModal = ({
   children,
-  defaultOpen,
   subheading,
   title,
   className,
@@ -30,7 +28,7 @@ const CustomModal = ({
   const { isOpen, setClose } = useModal();
 
   return (
-    <Dialog open={isOpen || defaultOpen} onOpenChange={setClose}>
+    <Dialog open={isOpen} onOpenChange={setClose}>
       <DialogContent className={clsx("relative bg-card md:h-fit", className)}>
         <DialogHeader className="sr-only text-left">
           <DialogTitle
@@ -43,7 +41,6 @@ const CustomModal = ({
           </DialogTitle>
           <DialogDescription>{subheading}</DialogDescription>
         </DialogHeader>
-        <button onClick={setClose} className="absolute right-2 top-2"></button>
         {children}
       </DialogContent>
     </Dialog>
