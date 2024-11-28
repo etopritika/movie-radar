@@ -2,11 +2,11 @@ import { create } from "zustand";
 
 interface LibraryStore {
   updateTrigger: number;
-  triggerUpdate: () => void;
+  updateLibrary: () => void;
 }
 
 export const useLibraryStore = create<LibraryStore>((set) => ({
   updateTrigger: 0,
-  triggerUpdate: () =>
+  updateLibrary: () =>
     set((state) => ({ updateTrigger: state.updateTrigger + 1 })),
 }));

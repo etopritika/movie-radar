@@ -31,7 +31,7 @@ const removeMovie = (id: number) => {
 };
 
 const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
-  const triggerUpdate = useLibraryStore((state) => state.triggerUpdate);
+  const updateLibrary = useLibraryStore((state) => state.updateLibrary);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
     } else {
       addMovie(data);
     }
-    triggerUpdate();
+    updateLibrary();
     setChecked(!checked);
   };
 
