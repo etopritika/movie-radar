@@ -1,36 +1,21 @@
 "use client";
 
-import { LocalStorageMovie } from "@/lib/types";
 import MovieCard from "./movie-card";
-import { useLibraryStore } from "@/store/update-library";
-import { useEffect, useState } from "react";
 import MoviePagination from "../pagination";
+import { useMoviesStore } from "@/store/use-movie-store";
 
 interface MovieGalleryClientProps {
-  page: number;
+  pageNumber: number;
 }
 
-export default function MovieGalleryClient({ page }: MovieGalleryClientProps) {
-  const updateTrigger = useLibraryStore((state) => state.updateTrigger);
-  const [movies, setMovies] = useState<LocalStorageMovie[]>([]);
-  const [totalMovies, setTotalMovies] = useState(0);
+export default function MovieGalleryClient({
+  pageNumber,
+}: MovieGalleryClientProps) {
+  const { movies } = useMoviesStore();
 
   const itemsPerPage = 20;
-  const isMovies = movies.length > 0;
 
-  useEffect(() => {
-    const savedMovies = JSON.parse(localStorage.getItem("movies") || "[]");
-
-    setTotalMovies(savedMovies.length);
-
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = page * itemsPerPage;
-    const paginatedMovies = savedMovies.slice(startIndex, endIndex);
-
-    setMovies(paginatedMovies);
-  }, [page, updateTrigger]);
-
-  if (!isMovies) {
+  if (movies.length === 0) {
     return (
       <div className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
         <p>Your library is empty. Add movies to appear here.</p>
@@ -38,13 +23,18 @@ export default function MovieGalleryClient({ page }: MovieGalleryClientProps) {
     );
   }
 
-  const totalPages = Math.ceil(totalMovies / itemsPerPage);
+  const totalPages = Math.ceil(movies.length / itemsPerPage);
+
+  const paginatedMovies = movies.slice(
+    (pageNumber - 1) * itemsPerPage,
+    pageNumber * itemsPerPage,
+  );
 
   return (
     <>
       <div className="mb-10 sm:mb-[60px]">
-        <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-5 md:grid-cols-2 md:gap-8 xl:grid-cols-3 xl:gap-x-4 xl:gap-y-8">
-          {movies.map(
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          {paginatedMovies.map(
             ({ id, title, poster_path, overview, release_date, genre_ids }) => (
               <MovieCard
                 key={id}
@@ -59,7 +49,7 @@ export default function MovieGalleryClient({ page }: MovieGalleryClientProps) {
           )}
         </ul>
       </div>
-      <MoviePagination currentPage={page} totalPages={totalPages} />
+      <MoviePagination currentPage={pageNumber} totalPages={totalPages} />
     </>
   );
 }

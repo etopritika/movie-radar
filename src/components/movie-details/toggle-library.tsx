@@ -1,70 +1,40 @@
-import { useState, useEffect } from "react";
 import { Plus, Check } from "lucide-react";
 import { LocalStorageMovie } from "@/lib/types";
-import { useLibraryStore } from "@/store/update-library";
+import { useMoviesStore } from "@/store/use-movie-store";
 
 interface ToggleLibraryProps {
   data: LocalStorageMovie;
 }
 
-const getSavedMovies = (): LocalStorageMovie[] => {
-  return JSON.parse(localStorage.getItem("movies") || "[]");
-};
-
-const saveMovies = (movies: LocalStorageMovie[]) => {
-  localStorage.setItem("movies", JSON.stringify(movies));
-};
-
-const isMovieSaved = (id: number): boolean => {
-  const savedMovies = getSavedMovies();
-  return savedMovies.some((movie) => movie.id === id);
-};
-
-const addMovie = (movie: LocalStorageMovie) => {
-  const savedMovies = getSavedMovies();
-  saveMovies([...savedMovies, movie]);
-};
-
-const removeMovie = (id: number) => {
-  const savedMovies = getSavedMovies();
-  saveMovies(savedMovies.filter((movie) => movie.id !== id));
-};
-
 const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
-  const updateLibrary = useLibraryStore((state) => state.updateLibrary);
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    setChecked(isMovieSaved(data.id));
-  }, [data.id]);
+  const { addMovie, removeMovie, movies } = useMoviesStore();
+  const isChecked = movies.some((movie) => movie.id === data.id);
 
   const handleChange = () => {
-    if (checked) {
+    if (isChecked) {
       removeMovie(data.id);
     } else {
       addMovie(data);
     }
-    updateLibrary();
-    setChecked(!checked);
   };
 
   return (
     <label className="flex w-full items-center justify-center">
       <input
         type="checkbox"
-        checked={checked}
+        checked={isChecked}
         onChange={handleChange}
         className="hidden"
       />
       <div
         className={`flex w-full items-center justify-center space-x-2 rounded-full border-none px-8 py-[14px] text-xs font-medium uppercase leading-[14px] text-white transition-colors ${
-          checked
+          isChecked
             ? "bg-green-600 hover:bg-green-500"
             : "bg-red-700 hover:bg-red-400"
         }`}
       >
-        <span>{checked ? "remove from queue" : "add to queue"}</span>
-        {checked ? <Check /> : <Plus />}
+        <span>{isChecked ? "remove from queue" : "add to queue"}</span>
+        {isChecked ? <Check /> : <Plus />}
       </div>
     </label>
   );

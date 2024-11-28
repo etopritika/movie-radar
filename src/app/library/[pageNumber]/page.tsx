@@ -12,7 +12,7 @@ export default async function MovieLibraryPage({
   return (
     <section>
       <h1 className="sr-only">Movie Library</h1>
-      <MovieGalleryClient page={page} />
+      <MovieGalleryClient pageNumber={page} />
     </section>
   );
 }
