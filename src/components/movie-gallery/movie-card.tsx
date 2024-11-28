@@ -33,8 +33,8 @@ export default function MovieCard({
   const handleOpenModal = () => {
     setOpen(
       <CustomModal
-        title=""
-        subheading=""
+        title="Film Information"
+        subheading="Get to know the movie better"
         className="max-w-[280px] bg-white px-7 pb-10 pt-12 sm:max-w-[576px] md:max-w-[704px] md:px-9 md:pb-16 md:pr-[72px] md:pt-10 xl:max-w-[806px] xl:px-3 xl:py-10"
       >
         <MovieDetails />
