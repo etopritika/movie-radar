@@ -38,7 +38,7 @@ export default function Navigation() {
           {links.map(({ href, label }) => (
             <Link
               key={href}
-              aria-current={pathname === href && "page"}
+              aria-current={pathname.includes(label) && "page"}
               className={getLinkStyles(pathname, label)}
               href={href}
             >
