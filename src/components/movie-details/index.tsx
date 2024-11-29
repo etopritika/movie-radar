@@ -21,7 +21,7 @@ export default function MovieDetails({ movieId }: MovieDetailsProps) {
     movieId ? `/movie/${movieId}` : null,
     () => fetchMovieByID(movieId),
   );
-  console.log("Movie details:", data);
+
   if (isLoading) {
     return <MovieDetailsSkeleton />;
   }
