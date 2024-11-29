@@ -3,6 +3,7 @@
 import MovieCard from "./movie-card";
 import MoviePagination from "../pagination";
 import { useMoviesStore } from "@/store/use-movie-store";
+import { GallerySkeleton } from "../skeletons/gallery-skeleton";
 
 interface MovieGalleryClientProps {
   pageNumber: number;
@@ -11,9 +12,13 @@ interface MovieGalleryClientProps {
 export default function MovieGalleryClient({
   pageNumber,
 }: MovieGalleryClientProps) {
-  const { movies } = useMoviesStore();
+  const { movies, loading } = useMoviesStore();
 
   const itemsPerPage = 20;
+
+  if (loading) {
+    return <GallerySkeleton />;
+  }
 
   if (movies.length === 0) {
     return (
