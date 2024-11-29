@@ -28,6 +28,7 @@ env
 ```bash
 NEXT_PUBLIC_API_KEY=<Your TMDB API Key>
 NEXT_PUBLIC_BASE_URL=https://api.themoviedb.org/3
+NEXT_PUBLIC_IMAGE_BASE_URL=https://image.tmdb.org/t/p
 ```
 
 4. Start the development server
