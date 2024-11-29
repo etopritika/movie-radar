@@ -18,7 +18,6 @@ export async function fetchTrending(page: number = 1) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error in fetchTrending:", error);
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error occurred";
     return { results: [], total_pages: 0, error: errorMessage };
@@ -45,7 +44,6 @@ export async function fetchMoviesByName(searchQuery: string, page: number = 1) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error in fetchMoviesByName:", error);
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error occurred";
     return { results: [], total_pages: 0, error: errorMessage };
@@ -70,7 +68,8 @@ export async function fetchMovieByID(movieId: number) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error in fetchMovieByID:", error);
-    throw new Error("An error occurred while fetching the movie details.");
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+    throw new Error(errorMessage);
   }
 }
