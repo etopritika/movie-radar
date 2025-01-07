@@ -5,7 +5,7 @@ export interface IBaseMovie {
   overview: string;
   genre_ids: number[];
   release_date: string;
-  current_date?: Date;
+  current_date?: Date | string;
 }
 
 export type Movie = IBaseMovie & {

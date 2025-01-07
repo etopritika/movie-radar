@@ -98,7 +98,9 @@ const LibraryTable: React.FC<LibraryTableProps> = ({ movies }) => {
               </td>
               <td className="border px-4 py-2">
                 {movie.current_date
-                  ? movie.current_date.toISOString().split("T")[0]
+                  ? typeof movie.current_date === "string"
+                    ? movie.current_date.split("T")[0]
+                    : movie.current_date.toISOString().split("T")[0]
                   : "Unknown"}
               </td>
               <td className="border px-4 py-2">
