@@ -1,9 +1,10 @@
 "use client";
 
-import MovieCard from "./movie-card";
+// import MovieCard from "./movie-card";
 import MoviePagination from "../pagination";
 import { useMoviesStore } from "@/store/use-movie-store";
 import { GallerySkeleton } from "../skeletons/gallery-skeleton";
+import LibraryTable from "../table/library-table";
 
 interface MovieGalleryClientProps {
   pageNumber: number;
@@ -38,7 +39,7 @@ export default function MovieGalleryClient({
   return (
     <>
       <div className="mb-10 sm:mb-[60px]">
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {/* <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {paginatedMovies.map(
             ({ id, title, poster_path, overview, release_date, genre_ids }) => (
               <MovieCard
@@ -52,7 +53,8 @@ export default function MovieGalleryClient({
               />
             ),
           )}
-        </ul>
+        </ul> */}
+        <LibraryTable movies={paginatedMovies} />
       </div>
       <MoviePagination currentPage={pageNumber} totalPages={totalPages} />
     </>

@@ -1,6 +1,6 @@
 import { IBaseMovie } from "@/lib/types";
 // import MovieCard from "./movie-card";
-import MovieTable from "../movie-table";
+import MovieTable from "../table/movie-table";
 
 interface MovieGalleryProps {
   movies: IBaseMovie[];

@@ -14,7 +14,11 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
     if (isChecked) {
       removeMovie(data.id);
     } else {
-      addMovie(data);
+      const movieWithDate = {
+        ...data,
+        current_date: new Date(),
+      };
+      addMovie(movieWithDate);
     }
   };
 
