@@ -1,6 +1,6 @@
 import { IBaseMovie } from "@/lib/types";
 // import MovieCard from "./movie-card";
-import MovieTable from "../table/movie-table";
+import MovieTable from "../test-table/movie-table";
 
 interface MovieGalleryProps {
   movies: IBaseMovie[];
@@ -24,6 +24,7 @@ export default function MovieGallery({ movies }: MovieGalleryProps) {
           ),
         )}
       </ul> */}
+      {/* Test-table */}
       <MovieTable movies={movies} />
     </div>
   );

@@ -4,7 +4,7 @@
 import MoviePagination from "../pagination";
 import { useMoviesStore } from "@/store/use-movie-store";
 import { GallerySkeleton } from "../skeletons/gallery-skeleton";
-import LibraryTable from "../table/library-table";
+import LibraryTable from "../test-table/library-table";
 
 interface MovieGalleryClientProps {
   pageNumber: number;
@@ -54,6 +54,7 @@ export default function MovieGalleryClient({
             ),
           )}
         </ul> */}
+        {/* Test-table */}
         <LibraryTable movies={paginatedMovies} />
       </div>
       <MoviePagination currentPage={pageNumber} totalPages={totalPages} />
