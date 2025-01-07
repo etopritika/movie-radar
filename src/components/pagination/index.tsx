@@ -136,7 +136,7 @@ export default function MoviePagination({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href={!isFirstPage ? getPageHref(currentPage - 1) : undefined}
+            href={!isFirstPage ? getPageHref(currentPage - 1) : ""}
             className={buttonClassName(isFirstPage)}
           />
         </PaginationItem>
@@ -145,7 +145,7 @@ export default function MoviePagination({
 
         <PaginationItem>
           <PaginationNext
-            href={!isLastPage ? getPageHref(currentPage + 1) : undefined}
+            href={!isLastPage ? getPageHref(currentPage + 1) : ""}
             className={buttonClassName(isLastPage)}
           />
         </PaginationItem>

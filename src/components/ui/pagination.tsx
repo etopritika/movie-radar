@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -36,23 +37,26 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  href: string;
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"a">;
+  React.ComponentProps<typeof Link>;
 
 const PaginationLink = ({
   className,
   isActive,
   size = "icon",
+  href,
   ...props
 }: PaginationLinkProps) => (
-  <a
+  <Link
+    href={href}
     aria-current={isActive ? "page" : undefined}
     className={cn(
       buttonVariants({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-      className
+      className,
     )}
     {...props}
   />
@@ -61,9 +65,11 @@ PaginationLink.displayName = "PaginationLink";
 
 const PaginationPrevious = ({
   className,
+  href,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
+}: React.ComponentProps<typeof PaginationLink> & { href: string }) => (
   <PaginationLink
+    href={href}
     aria-label="Go to previous page"
     size="default"
     className={cn("gap-1 pl-2.5", className)}
@@ -76,9 +82,11 @@ PaginationPrevious.displayName = "PaginationPrevious";
 
 const PaginationNext = ({
   className,
+  href,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
+}: React.ComponentProps<typeof PaginationLink> & { href: string }) => (
   <PaginationLink
+    href={href}
     aria-label="Go to next page"
     size="default"
     className={cn("gap-1 pr-2.5", className)}
