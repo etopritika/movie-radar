@@ -16,7 +16,7 @@ const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
     } else {
       const movieWithDate = {
         ...data,
-        current_date: new Date(),
+        current_date: new Date().toISOString(),
       };
       addMovie(movieWithDate);
     }
