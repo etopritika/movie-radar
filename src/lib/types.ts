@@ -5,6 +5,8 @@ export interface IBaseMovie {
   overview: string;
   genre_ids: number[];
   release_date: string;
+  vote_average: number;
+  popularity: number;
 }
 
 export type Movie = IBaseMovie & {
