@@ -40,6 +40,17 @@ export default function MovieRecommendationsGallery({
     return <GallerySkeleton />;
   }
 
+  if (movies.length === 0) {
+    return (
+      <div className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
+        <p>
+          To get recommendations — add some of your favorite movies to your
+          library 🎬
+        </p>
+      </div>
+    );
+  }
+
   if (error) {
     return (
       <section className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
