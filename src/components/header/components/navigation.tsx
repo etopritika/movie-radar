@@ -12,6 +12,7 @@ interface LinkItem {
 const links: LinkItem[] = [
   { href: "/trending/1", label: "trending" },
   { href: "/library/1", label: "library" },
+  { href: "/recommendations/1", label: "recommendations" },
 ];
 
 const styles = {
@@ -34,7 +35,7 @@ export default function Navigation() {
     <nav className="flex h-full flex-col items-center justify-between sm:items-start">
       <div className="flex w-full flex-col-reverse sm:flex-row sm:space-x-2">
         <SearchMovieForm />
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
           {links.map(({ href, label }) => (
             <Link
               key={href}

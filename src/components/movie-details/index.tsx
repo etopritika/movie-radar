@@ -106,6 +106,8 @@ export default function MovieDetails({ movieId }: MovieDetailsProps) {
             overview: overview,
             genre_ids: ids,
             release_date: data.release_date,
+            vote_average: data.vote_average,
+            popularity: data.popularity,
           }}
         />
       </div>
