@@ -1,13 +1,13 @@
 import { Check, Bookmark } from "lucide-react";
 import { LocalStorageMovie } from "@/lib/types";
-import { useMoviesStore } from "@/store/use-movie-store";
+import { useLibraryStore } from "@/store/use-library-store";
 
 interface ToggleLibraryProps {
   data: LocalStorageMovie;
 }
 
 const ToggleLibrary: React.FC<ToggleLibraryProps> = ({ data }) => {
-  const { addMovie, removeMovie, movies } = useMoviesStore();
+  const { addMovie, removeMovie, movies } = useLibraryStore();
   const isChecked = movies.some((movie) => movie.id === data.id);
 
   const handleChange = () => {

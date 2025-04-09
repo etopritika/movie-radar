@@ -11,7 +11,7 @@ interface MoviesState {
   setLoading: (loading: boolean) => void;
 }
 
-export const useMoviesStore = create<MoviesState>()(
+export const useLibraryStore = create<MoviesState>()(
   persist(
     (set, get) => ({
       movies: [],

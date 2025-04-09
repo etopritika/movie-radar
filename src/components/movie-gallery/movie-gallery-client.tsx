@@ -2,7 +2,7 @@
 
 import MovieCard from "./movie-card";
 import MoviePagination from "../pagination";
-import { useMoviesStore } from "@/store/use-movie-store";
+import { useLibraryStore } from "@/store/use-library-store";
 import { GallerySkeleton } from "../skeletons/gallery-skeleton";
 
 interface MovieGalleryClientProps {
@@ -12,7 +12,7 @@ interface MovieGalleryClientProps {
 export default function MovieGalleryClient({
   pageNumber,
 }: MovieGalleryClientProps) {
-  const { movies, loading } = useMoviesStore();
+  const { movies, loading } = useLibraryStore();
 
   const itemsPerPage = 20;
 
