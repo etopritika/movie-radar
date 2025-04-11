@@ -7,6 +7,7 @@ import { useLibraryStore } from "@/store/use-library-store";
 import { GallerySkeleton } from "../skeletons/gallery-skeleton";
 import { getRecommendations } from "@/lib/api-client";
 import RefreshButton from "../custom-buttons/refresh-button";
+import { Hourglass } from "lucide-react";
 
 export default function MovieRecommendationsGallery({
   pageNumber,
@@ -17,6 +18,7 @@ export default function MovieRecommendationsGallery({
   const [recommendations, setRecommendations] = useState([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [wakingUp, setWakingUp] = useState(false);
 
   const itemsPerPage = 20;
   const totalPages = Math.ceil(recommendations.length / itemsPerPage);
@@ -26,7 +28,12 @@ export default function MovieRecommendationsGallery({
   );
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setWakingUp(true);
+    }, 4000);
+
     getRecommendations(movies).then((data) => {
+      clearTimeout(timeout);
       if (data.errorMessage) {
         setError(data.errorMessage);
       } else {
@@ -37,17 +44,55 @@ export default function MovieRecommendationsGallery({
   }, [movies]);
 
   if (loading) {
-    return <GallerySkeleton />;
+    return wakingUp ? (
+      <section className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
+        <div className="flex items-center gap-2">
+          <p className="flex flex-col text-white">
+            Waking up the recommendation engine... Please wait.
+          </p>
+          <Hourglass className="animate-hourglass" />
+
+          <style>
+            {`
+      @keyframes hourglass-rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(180deg);
+        }
+        50% {
+          transform: rotate(180deg);
+        }
+        75% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .animate-hourglass {
+        animation: hourglass-rotate 2s infinite ease-in-out;
+        display: inline-block;
+      }
+    `}
+          </style>
+        </div>
+      </section>
+    ) : (
+      <GallerySkeleton />
+    );
   }
 
   if (movies.length === 0) {
     return (
-      <div className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
+      <section className="flex h-[50vh] flex-col items-center justify-center space-y-3 text-white">
         <p>
           To get recommendations — add some of your favorite movies to your
           library 🎬
         </p>
-      </div>
+      </section>
     );
   }
 
