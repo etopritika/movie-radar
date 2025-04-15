@@ -29,6 +29,7 @@ export default function MoviePagination({
     search: (page: number) => `/search/${query}/${page}`,
     library: (page: number) => `/library/${page}`,
     trending: (page: number) => `/trending/${page}`,
+    recommendations: (page: number) => `/recommendations/${page}`,
   };
 
   const getPageHref = (page: number) => {
@@ -37,6 +38,9 @@ export default function MoviePagination({
     }
     if (pathname.startsWith("/library")) {
       return routes.library(page);
+    }
+    if (pathname.startsWith("/recommendations")) {
+      return routes.recommendations(page);
     }
     return routes.trending(page);
   };
